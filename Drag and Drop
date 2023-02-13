@@ -1,0 +1,58 @@
+package Testcases;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class drop_drag_Testcase1 {
+
+	public static void main(String[] args) throws InterruptedException {
+		
+   System.setProperty("Webdriver.chrome.driver", "C:\\selenium_jar\\chromedriver_win32\\chromedriver.exe");
+		
+		
+		WebDriver driver = new ChromeDriver();
+		
+		driver.get("https://trello.com/login?returnUrl=%2Fb%2FtGWvI2ct%2Fboard1");
+		Thread.sleep(3000);
+	
+    driver.manage().window().maximize();
+	    
+	  driver.findElement(By.id("user")).sendKeys("madhuritupe99@gmail.com");
+    
+	  driver.findElement(By.id("login")).click();
+	  Thread.sleep(3000);
+	    
+	  driver.findElement(By.className("css-wxvfrp")).sendKeys("Madhuri@123");
+	   
+	  driver.findElement(By.id("login-submit")).click();
+     
+	  Thread.sleep(3000);
+	    
+	    WebElement e1 = driver.findElement(By.xpath("// span[text()='Madhuri_Tupe']"));
+	    WebElement e2 = driver.findElement(By.xpath("(// span[text()='Add a card'])[5]"));
+	    
+	    Actions act = new Actions(driver);
+	    
+	    act.dragAndDrop(e1, e2).pause(5000).build().perform();
+	    WebElement element=driver.findElement(By.xpath("// span[text()='Madhuri_Tupe']"));
+	    
+	     Point p = element.getLocation();
+	     
+	     System.out.println("Position of X point is:" + p.getX());
+	   
+	     System.out.println("Position of Y point is:" + p.getY());
+	    
+	     driver.findElement(By.xpath("(//span[@title='madhuri tanaji tupe (madhuritupe99)'])[1]")).click();
+	     Thread.sleep(2000);
+	   
+	     driver.findElement(By.xpath("//button[@data-testid='account-menu-logout']")).click();
+	   
+	     driver.quit();
+	       
+	}	
+
+}
